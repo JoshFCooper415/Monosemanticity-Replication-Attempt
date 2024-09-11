@@ -30,9 +30,7 @@ def extract_correlated_sections(code, feature_activation, window_size=50, top_k=
         return [(' '.join(tokens[:min(len(tokens), 20)]), feature_activation)]  # Return at most 20 tokens
 
     windows = [' '.join(tokens[i:i+window_size]) for i in range(len(tokens) - window_size + 1)]
-    
-    # Since we only have one activation value for the entire snippet,
-    # we'll return all windows with the same activation value
+
     return [(window, feature_activation) for window in windows[:top_k]]
 
 def analyze_features(sae, dataloader, collector, device, model, tokenizer, log_dir='logs'):
